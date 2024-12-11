@@ -45,14 +45,57 @@ The baseline models under consideration include Multiple Linear Regression for c
 The best model is evaluated based on the mean R2, mean MSE and mean RMSE. The mean R2 is the average of the R2 values across all folds, providing an overall measure of how the model explains the variability in the data. Overall, the best model performance is achieved with multiple linear regression when k-fold = 10 with a mean R2 of 91.32% across all folds. This means over 91% of the variance in autoTheft, the target variable, is explained by the selected features in the model. Besides the highest mean R2, random forest also has the lowest mean MSE and RMSE. However, despite these metrics, linear regression may not be the best model. After plotting residuals, examining their distributions, and analyzing the Q-Q plot, it appears that linear regression does not adequately fit the dataset. These diagnostic plots revealed patterns and deviations that suggest the assumptions underlying linear regression are not fully met. Therefore, alternative models, such as random forest, which better handle the complexity and potential non-linearity in the data, should be considered.
 Random forest performed second best with a mean R2 of 82.82%. It performed better by building and combining the results from multiple decision trees which reduces the chances of overfitting. By averaging the results, random forest performs better on new, unseen data. 
 
-###Hyparameter Fine Tuning
+### Hyparameter Fine Tuning
 The models were further fine-tuned by applying grid search to Lasso Regression (L1 penalty), Ridge Regression (L2 penalty), Decision tree, random forest, gradient boosting, and Naive bayes. Hyperparameter tuning is an important step in optimizing machine learning models (ML). By using predefined hyperparameter values, grid search makes sure that the model is tuned to achieve the highest accuracy. The findings for this process are summarized in Table 3.
 
 <img src="images/goFactrTable (4).png" alt="Description" width="200" height="200" />
 
 After hyperparameter tuning, the best models were Lasso and Ridge regression with R2 of nearly 79%. Despite their ability to reduce and remove less relevant features, these models did not outperform the baseline Random Forest at k = 10.
 
-###Clustering
+### Clustering
 K-means is an unsupervised algorithm used for clustering.  This iterative process ensures that the clusters are as compact and well-separated as possible. Overall k-means is relatively simple to implement, and scales well to large data sets. The drawbacks include k must be chosen manually and it has difficulty scaling data with a large number of features.  According to the elbow method, the optimal cluster is 5.  To confirm the selection from the elbow method, silhouette analysis was applied to the model. Silhouette measures similarities and differences within the clusters compared to other clusters where a higher value indicates a better-defined cluster; however, it is important to observe the quality or shape of the clusters, as a higher number does not always indicate the best model. The results from the analysis are displayed in table 4.
 
 <img src="images/goFactrTable (3).png" alt="Description" width="200" height="200" />
+The highest score was achieved with n = 2 clusters, yielding a score of 0.5638, as shown in Figure 3. Despite this high score, the silhouette plot for two clusters reveals that the clusters are not uniform. One cluster is considerably larger than the other indicating that the data within that cluster could be further divided into small clusters.  Ideally, all clusters should have similar average silhouette scores, indicating uniform separation. In addition, values should be positive with a narrow spread implying tight clusters. In the visualization for n = 5, which was selected as optimal using the elbow method, the clusters are not uniform, despite the silhouette score being 0.5353 as shown in Figure 5. This could suggest several possibilities: the data does not naturally form well-defined clusters, the chosen clustering algorithm and parameters are not capturing the true structure of the data, or data has overlapping or complex patterns that are not well-suited to simple clustering techniques. Cluster analysis is not the best tool for analysing the data. 
+<img src="images/s5.png" alt="Description" width="600" height="400" />
+
+Overall, the best model for our data is Random Forest with a r-squared of 82%.  
+
+## Discussion
+This research aimed to address the factors influencing auto theft through the lens of social disorganization theory by examining socio-economic predictors and applying machine learning models. Our random forest model exhibited the strongest predictive performance across its metrics, the model highlighted key variables—housing vacancy, unemployment rates, and education levels—as significant contributors to the incidence of auto theft. Our methodological adjustments, including feature selection and binning, aimed to simplify data representation and improve interpretability but may have contributed to the limitations of our models. To mitigate auto theft effectively, we propose two actionable solutions. The first being targeted community revitalization programs, based on the findings that housing vacancy strongly correlates with increased auto theft rates, community revitalization programs focusing on reducing vacant properties could help address this issue. Evidence suggests that policies incentivizing property rehabilitation, affordable housing development, and community engagement can strengthen neighborhood stability and reduce crime. For instance, neighborhood watch programs combined with environmental design strategies, such as improved street lighting and surveillance systems, have shown a 30% reduction in property crimes, including auto theft​ (Welsh & Farrington, 2008). Our second proposed solution is technological interventions and awareness campaigns, enhancing vehicle security through the adoption of anti-theft technologies, such as immobilizers and GPS tracking systems, is another effective solution. Studies report that vehicles equipped with such technologies exhibit a recovery rate of over 90% when stolen compared to a general recovery rate of about 50%​. Additionally, public awareness campaigns focused on educating residents about locking vehicles, removing valuables from sight, and reporting suspicious activity can further deter opportunistic theft (Prasetyo & Hidayat, 2021).
+
+Despite these proposed solutions, the limitations of this research should be acknowledged. The dataset used, while comprehensive, is dated and lacks representation of modern vehicle technologies and socio-economic dynamics. This may have affected the models' ability to capture contemporary patterns in auto theft. Furthermore, excluding incomplete rows may have reduced the generalizability of our findings.
+
+Future research should incorporate real-time data, such as recent vehicle theft trends and socio-economic updates, and explore advanced machine learning techniques to improve model accuracy. Moreover, integrating insights from community stakeholders could ensure interventions are equitable and contextually relevant, addressing systemic inequalities while fostering community trust and collaboration. By emphasizing both root causes and technological deterrents, these findings provide a foundation for multi-faceted interventions aimed at reducing auto theft, reinforcing the critical role of community stability in crime prevention.
+ 
+## Conclusion
+In conclusion, this study set out to examine the relationship between social disorganization and auto theft using socio-economic and law enforcement data. By employing predictive models and focusing on key variables such as unemployment rates, poverty levels, housing vacancy, and educational attainment, we identified significant socio-economic predictors of auto theft in various communities. The findings reinforce the importance of social structures in crime prevention, showing that weakened community cohesion and economic instability contribute to higher rates of auto theft.
+
+The integration of supervised and unsupervised machine learning models enhanced our understanding of these dynamics. While the supervised models quantified the relationships between specific variables and auto theft rates, the unsupervised models provided deeper insights into community-level patterns, uncovering unique clusters and unexpected anomalies. These methods together emphasized the complexity of the factors driving auto theft and bring out the need for context-specific interventions.
+Furthermore, this research underscores the ethical responsibility to address systemic inequalities and engage with stakeholders when designing crime prevention strategies. Policies that strengthen communities, reduce housing vacancy, and create economic opportunities can address the base causes of auto theft, rather than simply its symptoms. Working with local governments, law enforcement, urban planners, and community members will be essential to bringing on equitable and effective solutions.
+
+## References
+
+References
+Bennett, T., Holloway, K., & Farrington, D. P. (2006). Does neighborhood watch reduce crime? A systematic review and meta-analysis. Journal of Experimental Criminology, 2(4), 437–458. https://doi.org/10.1007/s11292-006-9018-5
+
+Bowers, K. J., Johnson, S. D., & Hirschfield, A. (2004). Closing off opportunities for crime: An evaluation of alley-gating. European Journal on Criminal Policy and Research, 10(4), 285-308. https://link.springer.com/article/10.1007/s10610-005-5502-0 
+
+Chelsea M. Spencer, et al. “The Role of Income Inequality on Factors Associated with Male Physical Intimate Partner Violence Perpetration: A Meta-Analysis.” Aggression and Violent Behavior, Pergamon, 22 Aug. 2019, www.sciencedirect.com/science/article/abs/pii/S1359178918302726. 
+
+FBI. (2016, August 16). Motor vehicle theft. FBI. https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/offenses-known-to-law-enforcement/motor-vehicle-theftTheft 
+Lee, B., Lee, J., & Hoover, L. (2016). Neighborhood characteristics and auto theft: An empirical research from the social disorganization perspective. Secur J, 29, 400–408. https://doi.org/10.1057/sj.2013.35 
+National Insurance Crime Bureau. (2020). Vehicle theft prevention tips. NICB. https://www.nicb.org/prevent-fraud-theft/vehicle-theft-prevention 
+
+Prasetyo, E., & Hidayat, R. (2021). GPS-Based Vehicle Tracking and Theft Detection Systems using Google Maps and SMS. 2021 International Seminar on Intelligent Technology and Its Applications (ISITIA), 7-12. https://ieeexplore.ieee.org/document/9501928?arnumber=9501928&utm_source=
+
+Sampson, R. J., & Groves, W. B. (1989). Community structure and crime: Testing social-disorganization theory. American Journal of Sociology, 94(4), 774-802. https://doi.org/10.1086/229068 
+
+Straughan, D. (2024, September 12). Car theft statistics 2024. MarketWatch. https://www.marketwatch.com/guides/insurance-services/car-theft-statistics/ 
+
+Suresh, G., & Tewksbury, R. (2013). Locations of motor vehicle theft and recovery. American Journal of Criminal Justice: AJCJ, 38(2), 200-215. https://doi.org/10.1007/s12103-012-9161-7 
+
+Welsh, B. C., & Farrington, D. P. (2008). Effects of improved street lighting on crime. Office of Justice Programs. https://www.ojp.gov/ncjrs/virtual-library/abstracts/effects-improved-street-lighting-crime 
+
+Wickert, C. (2023, November 28). Social Disorganization Theory (Shaw & McKay). SozTheo. https://soztheo.de/theories-of-crime/social-disorganization/soziale-desorganisation-shaw-mckay/?lang=en 
+

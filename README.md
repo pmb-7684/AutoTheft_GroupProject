@@ -33,11 +33,26 @@ After this entire process, our dataset was left with 2,212 observations and 20 f
 ### Feature Selection
 To gain further insight, a heatmap was created to illustrate the strength and direction to the relationships between the features and the target variable. Overall, most of the correlations are nearly zero, which suggests that there is no meaningful relationship between these two variables. For clarity, the number of features shown in the results (Figure 2) was reduced to thirteen, revealing several noteworthy correlations. The heatmap shows the strongest positive correlation of 0.90 between auto theft and house vacancy, suggesting that as house vacancies increase, the number of auto thefts also rises. Additionally, there is a moderate positive correlation of 0.34 between public transportation and auto theft. Other relationships include Auto Theft and Percentage Boarded Vacant houses with 0.18 correlation , Auto Theft and Percentage Unemployed with 0.12 correlation, and Auto theft and Percent Poverty with 0.11 correlation. All these correlations are positive, suggesting that as one feature increases, the other is expected to increase as well.
 
-<img src="images/IMAGE1.png" alt="Description" width="600" height="500" />
+<img src="images/IMAGE1.png" alt="Description" width="400" height="400" />
 
 We dropped features that were not relevant to the research focus, simplifying the dataset to only include socio-economic factors that could potentially influence auto theft rates.
 ## Model Selection
 ### Baseline 
 The baseline models under consideration include Multiple Linear Regression for continuous target variables, Decision Trees, Random Forest, Naive Bayes, and Gradient Boosted Predictive Models. Cross-validation was applied to each model to improve the reliability of the model’s performance. For all five models, the best performance was observed when k = 10. With 10-fold cross-validation, each fold is using 90% of the data for training and 10% for testing, providing a better training process compared to 80% training set used in 5-fold cross-validation. Additionally, a larger number of folds reduces the variance in the model. The findings for this process are summarized in Table 2.
 
-<img src="images/goFactrTable(2).png" alt="Description" width="600" height="500" />
+<img src="images/goFactrTable (2).png" alt="Description" width="200" height="200" />
+
+The best model is evaluated based on the mean R2, mean MSE and mean RMSE. The mean R2 is the average of the R2 values across all folds, providing an overall measure of how the model explains the variability in the data. Overall, the best model performance is achieved with multiple linear regression when k-fold = 10 with a mean R2 of 91.32% across all folds. This means over 91% of the variance in autoTheft, the target variable, is explained by the selected features in the model. Besides the highest mean R2, random forest also has the lowest mean MSE and RMSE. However, despite these metrics, linear regression may not be the best model. After plotting residuals, examining their distributions, and analyzing the Q-Q plot, it appears that linear regression does not adequately fit the dataset. These diagnostic plots revealed patterns and deviations that suggest the assumptions underlying linear regression are not fully met. Therefore, alternative models, such as random forest, which better handle the complexity and potential non-linearity in the data, should be considered.
+Random forest performed second best with a mean R2 of 82.82%. It performed better by building and combining the results from multiple decision trees which reduces the chances of overfitting. By averaging the results, random forest performs better on new, unseen data. 
+
+###Hyparameter Fine Tuning
+The models were further fine-tuned by applying grid search to Lasso Regression (L1 penalty), Ridge Regression (L2 penalty), Decision tree, random forest, gradient boosting, and Naive bayes. Hyperparameter tuning is an important step in optimizing machine learning models (ML). By using predefined hyperparameter values, grid search makes sure that the model is tuned to achieve the highest accuracy. The findings for this process are summarized in Table 3.
+
+<img src="images/goFactrTable (4).png" alt="Description" width="200" height="200" />
+
+After hyperparameter tuning, the best models were Lasso and Ridge regression with R2 of nearly 79%. Despite their ability to reduce and remove less relevant features, these models did not outperform the baseline Random Forest at k = 10.
+
+###Clustering
+K-means is an unsupervised algorithm used for clustering.  This iterative process ensures that the clusters are as compact and well-separated as possible. Overall k-means is relatively simple to implement, and scales well to large data sets. The drawbacks include k must be chosen manually and it has difficulty scaling data with a large number of features.  According to the elbow method, the optimal cluster is 5.  To confirm the selection from the elbow method, silhouette analysis was applied to the model. Silhouette measures similarities and differences within the clusters compared to other clusters where a higher value indicates a better-defined cluster; however, it is important to observe the quality or shape of the clusters, as a higher number does not always indicate the best model. The results from the analysis are displayed in table 4.
+
+<img src="images/goFactrTable (3).png" alt="Description" width="200" height="200" />

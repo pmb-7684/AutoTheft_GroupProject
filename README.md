@@ -1,5 +1,8 @@
 # Auto Theft and Social Disorganization Theory
-DTSC Project on social disorganization and auto theft
+#### Omar Brandon, Ryan Kaplan, Paula McCree-Bailey, and Rohitha Sanka
+
+## Objective
+The project should focus on a problem involving the analysis of one or more data sets and the application of machine learning and data mining methods to better inform policing and crime prevention efforts and policies. Building models that can identify patterns in the community crime dataset to help organizations better understand community factors and crimes and give them an advantage when making decisions in their fight against crime, better policing and safer communities. 
 
 ## Introduction
 Every 31 seconds a car is stolen in the United States, which equates to more than 1 million annually (Straughan, 2024). Data published by the FBI unveils that motor vehicle theft (MVT) is one of the most common crimes in the US but one of the least researched topics (Suresh and Tewksbury 2012). The loss of an automobile can pose significant financial and emotional distress on individuals which results in a disrupted lifestyle pattern. The social disorganization theory, introduced by Clifford Shaw and Henry McKay, aligns closely with our topic of auto theft. This theory emphasizes how environmental factors influence delinquency and criminal behavior (Mendez, Spencer, & Stith, 2019). 
@@ -17,3 +20,24 @@ The integration of social disorganization theory into this study reinforces its 
 
 ## Data
 The Communities and Crime dataset contains 2,215 observations and 147 features which combined socio-economic data from the 1990 U.S. census, law enforcement data from the 1990 U.S. Law Enforcement Management and Administrative Statistics (LEMAS) survey and the 1995 FBI Uniform Crime Report (UCR) crime data. The range of features include percentage of urban, median income, race per capita, percentage population under poverty, marital status, information on police officers in the community and various types of criminal offenses, provide a lot of information for algorithm predictions. 
+
+### Pre-Processing 
+The dataset required significant pre-processing to prepare it for analysis, particularly in terms of handling missing values. Some of the features contained missing values, which were represented by the symbol "?". Rather than attempting to impute missing data, which could introduce bias or reduce the integrity of our analysis, we opted to remove all rows containing missing values. 
+```
+autoCrime =  autoCrime.apply(pd.to_numeric, errors='coerce')
+autoCrime = autoCrime.replace('?', float('nan'))
+autoCrime = autoCrime.dropna()
+```
+After this entire process, our dataset was left with 2,212 observations and 20 features that we would be looking at. This decision ensured that the remaining dataset was complete and that our analysis could be conducted without concerns about incomplete data.
+
+### Feature Selection
+To gain further insight, a heatmap was created to illustrate the strength and direction to the relationships between the features and the target variable. Overall, most of the correlations are nearly zero, which suggests that there is no meaningful relationship between these two variables. For clarity, the number of features shown in the results (Figure 2) was reduced to thirteen, revealing several noteworthy correlations. The heatmap shows the strongest positive correlation of 0.90 between auto theft and house vacancy, suggesting that as house vacancies increase, the number of auto thefts also rises. Additionally, there is a moderate positive correlation of 0.34 between public transportation and auto theft. Other relationships include Auto Theft and Percentage Boarded Vacant houses with 0.18 correlation , Auto Theft and Percentage Unemployed with 0.12 correlation, and Auto theft and Percent Poverty with 0.11 correlation. All these correlations are positive, suggesting that as one feature increases, the other is expected to increase as well.
+
+<img src="images/IMAGE1.png" alt="Description" width="600" height="500" />
+
+We dropped features that were not relevant to the research focus, simplifying the dataset to only include socio-economic factors that could potentially influence auto theft rates.
+## Model Selection
+### Baseline 
+The baseline models under consideration include Multiple Linear Regression for continuous target variables, Decision Trees, Random Forest, Naive Bayes, and Gradient Boosted Predictive Models. Cross-validation was applied to each model to improve the reliability of the model’s performance. For all five models, the best performance was observed when k = 10. With 10-fold cross-validation, each fold is using 90% of the data for training and 10% for testing, providing a better training process compared to 80% training set used in 5-fold cross-validation. Additionally, a larger number of folds reduces the variance in the model. The findings for this process are summarized in Table 2.
+
+<img src="images/goFactrTable(2).png" alt="Description" width="600" height="500" />

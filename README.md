@@ -1,5 +1,6 @@
-# Auto Theft and Social Disorganization Theory
-#### Omar Brandon, Ryan Kaplan, Paula McCree-Bailey, and Rohitha Sanka
+Auto Theft Crime Analysis through Social Disorganization Theory
+=========================
+Omar Brandon, Ryan Kaplan, Paula McCree-Bailey, and Rohitha Sanka
 
 ## **Objective**
 The project should focus on a problem involving the analysis of one or more data sets and the application of machine learning and data mining methods to better inform policing and crime prevention efforts and policies. Building models that can identify patterns in the community crime dataset to help organizations better understand community factors and crimes and give them an advantage when making decisions in their fight against crime, better policing and safer communities. 
